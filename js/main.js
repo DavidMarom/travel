@@ -7,6 +7,9 @@ locService.getLocs()
     .then(locs => console.log('locs', locs))
 
 window.onload = () => {
+    palcesService.getUserPlaces()
+
+    renderSavedPlaces()
     mapService.initMap()
         .then(() => {
 
@@ -35,15 +38,15 @@ document.querySelector('.btn').addEventListener('click', (ev) => {
 
 
 document.querySelector('#map').addEventListener('contextmenu', (ev) => {
-    // debugger
+    debugger
     locService.getPosition()
         .then(ev => {
             console.log(ev.coords)
             palcesService.createPlace(ev.coords)
+            renderSavedPlaces()
             // mapService.panTo(ev.GeolocationCoordinates.coords.latitude, ev.GeolocationCoordinates.coords.longitude)
         })
 })
-
 function renderSavedPlaces(){
     var savedPlaces = palcesService.getUserPlaces();
     const elSavedPlacesContainer = document.querySelector('.saved-places');
@@ -56,6 +59,7 @@ function renderSavedPlaces(){
         
         `
     })
+    elSavedPlacesContainer.innerHTML+= strHtml.join('');
 }
 
 //         // Create the initial InfoWindow.
