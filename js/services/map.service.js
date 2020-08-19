@@ -2,7 +2,7 @@
 export const mapService = {
     initMap,
     addMarker,
-    panTo,
+    panTo
     // moveOnMap
 
 }
@@ -51,17 +51,6 @@ function _connectGoogleApi() {
     })
 }
 
-// function moveOnMap(){
-// map.addListener('click', function(mapsMouseEvent) {
-//     // Close the current InfoWindow.
-//     infoWindow.close();
-
-//     // Create a new InfoWindow.
-//     infoWindow = new google.maps.InfoWindow({position: mapsMouseEvent.latLng});
-//     infoWindow.setContent(mapsMouseEvent.latLng.toString());
-//     infoWindow.open(map);
-//   });
-// }
 
 
 
