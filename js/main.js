@@ -30,8 +30,12 @@ document.querySelector('.btn').addEventListener('click', (ev) => {
     mapService.panTo(35.6895, 139.6917);
 
 })
-// document.querySelector('#map').addEventListener('click', (ev) => {
-
-// }
+document.querySelector('#map').addEventListener('click', (ev) => {
+    debugger
+    locService.getPosition()
+        .then(ev => {
+            mapService.panTo(ev.latitude, ev.longitude)
+        })
+})
 
 
