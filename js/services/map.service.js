@@ -2,7 +2,9 @@
 export const mapService = {
     initMap,
     addMarker,
-    panTo
+    panTo,
+    moveOnMap
+
 }
 
 var map;
@@ -37,7 +39,7 @@ function panTo(lat, lng) {
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
-    const API_KEY = ''; //TODO: Enter your API Key
+    const API_KEY = 'AIzaSyBdL0KlYTebDJUak4_QskhFhHZX7OuIOhU'; 
     var elGoogleApi = document.createElement('script');
     elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
     elGoogleApi.async = true;
@@ -47,6 +49,17 @@ function _connectGoogleApi() {
         elGoogleApi.onload = resolve;
         elGoogleApi.onerror = () => reject('Google script failed to load')
     })
+}
+function moveOnMap(){
+map.addListener('click', function(mapsMouseEvent) {
+    // Close the current InfoWindow.
+    infoWindow.close();
+
+    // Create a new InfoWindow.
+    infoWindow = new google.maps.InfoWindow({position: mapsMouseEvent.latLng});
+    infoWindow.setContent(mapsMouseEvent.latLng.toString());
+    infoWindow.open(map);
+  });
 }
 
 
