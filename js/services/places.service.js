@@ -1,7 +1,8 @@
 export const placesService = {
     getUserPlaces,
     createPlace,
-    setUserPlaces
+    setUserPlaces,
+    addToCords
 }
 var gNextId = 0
 
@@ -15,6 +16,15 @@ function setUserPlaces(val) {
 function getUserPlaces() {
     return gPlaces;
 }
+
+function addToCords(add) {
+    $.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${add}&key=AIzaSyBdL0KlYTebDJUak4_QskhFhHZX7OuIOhU`, putAddress);
+}
+
+function putAddress(res) {
+    console.log(res);
+}
+
 
 function createPlace(place) {
     console.log('createPlaces: ', place);

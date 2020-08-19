@@ -1,10 +1,7 @@
-
 export const mapService = {
     initMap,
     addMarker,
     panTo
-    // moveOnMap
-
 }
 
 var map;
@@ -16,9 +13,12 @@ export function initMap(lat = 32.0749831, lng = 34.9120554) {
             console.log('google available');
             map = new google.maps.Map(
                 document.querySelector('#map'), {
-                center: { lat, lng },
-                zoom: 15
-            })
+                    center: {
+                        lat,
+                        lng
+                    },
+                    zoom: 15
+                })
             console.log('Map!', map);
         })
 }
@@ -32,6 +32,7 @@ function addMarker(loc) {
     return marker;
 }
 
+
 function panTo(lat, lng) {
     var laLatLng = new google.maps.LatLng(lat, lng);
     map.panTo(laLatLng);
@@ -39,7 +40,7 @@ function panTo(lat, lng) {
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
-    const API_KEY = 'AIzaSyBdL0KlYTebDJUak4_QskhFhHZX7OuIOhU'; 
+    const API_KEY = 'AIzaSyBdL0KlYTebDJUak4_QskhFhHZX7OuIOhU';
     var elGoogleApi = document.createElement('script');
     elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
     elGoogleApi.async = true;
@@ -50,7 +51,3 @@ function _connectGoogleApi() {
         elGoogleApi.onerror = () => reject('Google script failed to load')
     })
 }
-
-
-
-

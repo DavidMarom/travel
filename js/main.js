@@ -32,11 +32,15 @@ window.onload = () => {
             console.log('Cannot get user-position', err);
         })
         // console.log(palcesService.getUserPlaces())
+
+
+
 }
 
 document.querySelector('.btn').addEventListener('click', (ev) => {
     console.log('Aha!', ev.target);
-    mapService.panTo(35.6895, 139.6917);
+    // mapService.panTo(35.6895, 139.6917);
+    placesService.addToCords('raanana');
 })
 
 document.querySelector('#map').addEventListener('contextmenu', (ev) => {
@@ -66,21 +70,4 @@ function renderSavedPlaces(){
     elSavedPlacesContainer.innerHTML ='';
     elSavedPlacesContainer.innerHTML= strHtml.join('');
 }
-
-//         // Create the initial InfoWindow.
-//         var infoWindow = new google.maps.InfoWindow(
-//             {content: 'Click the map to get Lat/Lng!', position: myLatlng});
-//         infoWindow.open(map);
-
-//         // Configure the click listener.
-//         map.addListener('click', function(mapsMouseEvent) {
-//           // Close the current InfoWindow.
-//           infoWindow.close();
-
-//           // Create a new InfoWindow.
-//           infoWindow = new google.maps.InfoWindow({position: mapsMouseEvent.latLng});
-//           infoWindow.setContent(mapsMouseEvent.latLng.toString());
-//           infoWindow.open(map);
-//         });
-
 
