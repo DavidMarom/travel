@@ -7,13 +7,7 @@ locService.getLocs()
     .then(locs => console.log('locs', locs))
 
 window.onload = () => {
-    if (!loadFromStorage('Places') || loadFromStorage('Places') === '') { // if nothing in storage
-        // setUserPlaces([]);
-        console.log('nothing in storage');
-    } else {
-        setUserPlaces(loadFromStorage('Places'));
-        console.log('on storage: ', gPlaces);
-    }
+  
     renderSavedPlaces()
 
     mapService.initMap()
@@ -60,12 +54,27 @@ function renderSavedPlaces(){
         return `
         <div class="saved-place" data-id="${place.id}">
         <h5>latitude: ${place.lat}, longtitude: ${place.lng}</h5>
+        <h5>Created at:${place.time} </h5>
+        <button class="delete-btn" data-id="${place.id}"> X </button>
         </div>`
     })
 
     elSavedPlacesContainer.innerHTML ='';
     elSavedPlacesContainer.innerHTML= strHtml.join('');
+    const elDeleteBtns = document.querySelectorAll('.delete-btn')
+    elDeleteBtns.forEach(elBtn =>{
+        elBtn.onclick = onDeletePlace
+    })
 }
+function onDeletePlace(ev){
+    const elBtn = ev.target
+    placesService.deletePlace(+elBtn.dataset.id)
+    renderSavedPlaces()
+}
+
+
+
+
 
 //         // Create the initial InfoWindow.
 //         var infoWindow = new google.maps.InfoWindow(
