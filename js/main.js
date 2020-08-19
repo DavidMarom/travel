@@ -2,14 +2,20 @@ console.log('Main!');
 import { storageService } from './services/storage.service.js'
 import { locService } from './services/loc.service.js'
 import { mapService } from './services/map.service.js'
-import { palcesService } from './services/places.service.js'
+import { placesService } from './services/places.service.js'
 locService.getLocs()
     .then(locs => console.log('locs', locs))
 
 window.onload = () => {
-    palcesService.getUserPlaces()
-
+    if (!loadFromStorage('Places') || loadFromStorage('Places') === '') { // if nothing in storage
+        // setUserPlaces([]);
+        console.log('nothing in storage');
+    } else {
+        setUserPlaces(loadFromStorage('Places'));
+        console.log('on storage: ', gPlaces);
+    }
     renderSavedPlaces()
+
     mapService.initMap()
         .then(() => {
 
@@ -26,40 +32,39 @@ window.onload = () => {
             console.log('Cannot get user-position', err);
         })
         // console.log(palcesService.getUserPlaces())
-
 }
 
 document.querySelector('.btn').addEventListener('click', (ev) => {
     console.log('Aha!', ev.target);
     mapService.panTo(35.6895, 139.6917);
-
 })
 
-
-
 document.querySelector('#map').addEventListener('contextmenu', (ev) => {
-    debugger
+    console.log(placesService.getUserPlaces());
     locService.getPosition()
         .then(ev => {
-            console.log(ev.coords)
-            palcesService.createPlace(ev.coords)
+            placesService.createPlace(ev.coords)
+
             renderSavedPlaces()
+
             // mapService.panTo(ev.GeolocationCoordinates.coords.latitude, ev.GeolocationCoordinates.coords.longitude)
         })
 })
+
+
 function renderSavedPlaces(){
-    var savedPlaces = palcesService.getUserPlaces();
-    const elSavedPlacesContainer = document.querySelector('.saved-places');
+    var savedPlaces = placesService.getUserPlaces();
+    const elSavedPlacesContainer = document.querySelector('.saved-places'); // catch DOM element
     var strHtml = savedPlaces.map( place =>{
+        // console.log('place:' ,place);
         return `
-        <div class ="saved-place" data-id="${place.id}">
-        <h5>latitude: ${place.latitude}</5>
-        <h5>longtitude: ${place.longtitude}</5>
-        </div>
-        
-        `
+        <div class="saved-place" data-id="${place.id}">
+        <h5>latitude: ${place.lat}, longtitude: ${place.lng}</h5>
+        </div>`
     })
-    elSavedPlacesContainer.innerHTML+= strHtml.join('');
+
+    elSavedPlacesContainer.innerHTML ='';
+    elSavedPlacesContainer.innerHTML= strHtml.join('');
 }
 
 //         // Create the initial InfoWindow.

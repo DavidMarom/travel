@@ -1,25 +1,29 @@
-'use strict'
-export const palcesService ={
+export const placesService = {
     getUserPlaces,
     createPlace,
+    setUserPlaces
 }
 var gNextId = 0
 
-var gPlaces = loadFromStorage('Places') ? loadFromStorage('Places'): [];
-// var gPlaces = [1,2,3]
+// var gPlaces = loadFromStorage('Places') ? loadFromStorage('Places'): [];
+var gPlaces = [];
 
-function getUserPlaces(){
-    // gPlaces = loadFromStorage('Places')
-    // if(!gPlaces) gPlaces = []
-    return gPlaces
+function setUserPlaces(val) {
+    gPlaces=val;
 }
 
-function createPlace(place){
+function getUserPlaces() {
+    return gPlaces;
+}
+
+function createPlace(place) {
+    console.log('createPlaces: ', place);
     const newPlace = {
-        id:gNextId++,
-        lat:place.latitude,
-        lng:place.longitude
+        id: gNextId++,
+        lat: place.latitude,
+        lng: place.longitude
     }
     gPlaces.push(newPlace);
-    saveToStorage('places',gPlaces);
+    console.log('this is what gPlaces has right after push new palce')
+    saveToStorage('places', gPlaces);
 }
