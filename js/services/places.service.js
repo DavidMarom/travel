@@ -5,8 +5,8 @@ export const palcesService ={
 }
 var gNextId = 0
 
-// var gPlaces = loadFromStorage('Places') ? loadFromStorage('Places'): [];
-var gPlaces = [1,2,3]
+var gPlaces = loadFromStorage('Places') ? loadFromStorage('Places'): [];
+// var gPlaces = [1,2,3]
 
 function getUserPlaces(){
     // gPlaces = loadFromStorage('Places')
@@ -15,7 +15,6 @@ function getUserPlaces(){
 }
 
 function createPlace(place){
-    debugger
     const newPlace = {
         id:gNextId++,
         lat:place.latitude,
@@ -23,5 +22,4 @@ function createPlace(place){
     }
     gPlaces.push(newPlace);
     saveToStorage('places',gPlaces);
-
 }
