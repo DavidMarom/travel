@@ -50,17 +50,7 @@ function _connectGoogleApi() {
         elGoogleApi.onerror = () => reject('Google script failed to load')
     })
 }
-// function moveOnMap(){
-// map.addListener('click', function(mapsMouseEvent) {
-//     // Close the current InfoWindow.
-//     infoWindow.close();
 
-//     // Create a new InfoWindow.
-//     infoWindow = new google.maps.InfoWindow({position: mapsMouseEvent.latLng});
-//     infoWindow.setContent(mapsMouseEvent.latLng.toString());
-//     infoWindow.open(map);
-//   });
-// }
 
 
 
